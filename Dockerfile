@@ -10,10 +10,10 @@ RUN apt-get update \
 WORKDIR /build
 COPY . .
 
-RUN GO111MODULE=on CGO_ENABLED=0 go build -o ./bin/go_skel \
+RUN GO111MODULE=on CGO_ENABLED=0 go build -o ./bin/lamp \
     -ldflags='-w -s -extldflags "-static"' \
     . \
- && upx-ucl --best --ultra-brute ./bin/go_skel
+ && upx-ucl --best --ultra-brute ./bin/lamp
 
 ###########
 # release #
@@ -24,6 +24,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     git
 
-COPY --from=builder /build/bin/go_skel /bin/
+COPY --from=builder /build/bin/lamp /bin/
 WORKDIR /workdir
-ENTRYPOINT ["/bin/go_skel"]
+ENTRYPOINT ["/bin/lamp"]
