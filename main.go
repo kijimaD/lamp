@@ -12,5 +12,6 @@ func main() {
 		panic(err)
 	}
 
-	myscope.Run(file)
+	c := myscope.NewClient(file, os.Stdout)
+	c.Run()
 }

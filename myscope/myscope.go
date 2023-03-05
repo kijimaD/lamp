@@ -13,10 +13,19 @@ import (
 	"github.com/davecgh/go-spew/spew"
 )
 
-func Run(src io.Reader) {
+type Client struct {
+	Input  io.Reader
+	Output io.Writer
+}
+
+func NewClient(input io.Reader, output io.Writer) Client {
+	return Client{input, output}
+}
+
+func (c *Client) Run() {
 	// https://qiita.com/tenntenn/items/ac5940dfbca703183fdf
 	fset := token.NewFileSet()
-	file, err := parser.ParseFile(fset, "", src, 0)
+	file, err := parser.ParseFile(fset, "", c.Input, 0)
 	if err != nil {
 		log.Fatalln("Error:", err)
 	}
@@ -40,9 +49,9 @@ func Run(src io.Reader) {
 		return true
 	})
 
-	fmt.Println("────", len(scopes), "scopes ────")
+	fmt.Fprintln(c.Output, "────", len(scopes), "scopes ────")
 
 	for s := range scopes {
-		spew.Dump(s)
+		spew.Fdump(c.Output, s)
 	}
 }
