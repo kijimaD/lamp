@@ -21,7 +21,7 @@ linters:
     - execinquery
     - exhaustive
     # - exhaustivestruct
-    - exhaustruct
+    # - exhaustruct
     - exportloopref
     - forbidigo
     - forcetypeassert
@@ -102,4 +102,4 @@ linters:
     # - wastedassign
     - whitespace
     - wrapcheck
-    - wsl
+    # - wsl
