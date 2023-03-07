@@ -18,6 +18,17 @@ func main() {
     fmt.Println(message)
 }`
 
+const srcUni = `package main
+
+import (
+    myfmt "fmt"
+)
+
+func main() {
+    var string string = "HELLO"
+    myfmt.Println(string)
+}`
+
 func TestRun(t *testing.T) {
 	t.Parallel()
 
@@ -28,6 +39,21 @@ func TestRun(t *testing.T) {
 	c.Run()
 
 	part := "──── 3 scopes ────"
+	got := out.String()
+
+	assert.Contains(t, got, part)
+}
+
+func TestUniverse(t *testing.T) {
+	t.Parallel()
+
+	in := strings.NewReader(srcUni)
+	out := &bytes.Buffer{}
+
+	c := myscope.NewClient(in, out)
+	c.Run()
+
+	part := "──── 4 scopes ────"
 	got := out.String()
 
 	assert.Contains(t, got, part)
