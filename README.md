@@ -6,7 +6,7 @@ analyzer collections.
 
 ```
 $ go install github.com/kijimaD/lamp@main
-$ lamp sample/main.go
+$ lamp myscope sample/main.go
 ──── 3 scopes ────
 (*types.Scope)(0xc00001e600)(package "main" scope 0xc00001e600 {
 .  func main.main()
@@ -25,5 +25,5 @@ $ lamp sample/main.go
 ## docker run
 
 ```
-$ docker run -v "$PWD/":/work -w /work --rm -it ghcr.io/kijimad/lamp:latest sample/main.go
+$ docker run -v "$PWD/":/work -w /work --rm -it ghcr.io/kijimad/lamp:latest myscope sample/main.go
 ```
