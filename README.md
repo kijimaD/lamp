@@ -2,6 +2,12 @@
 
 analyzer collections.
 
+| Name    | Description   |
+|---------|---------------|
+| myscope | show scopes   |
+| astdump | show ast dump |
+| expstmt | show nodes    |
+
 ## install run
 
 ```

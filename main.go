@@ -8,6 +8,7 @@ import (
 	"go/token"
 	"os"
 
+	"github.com/kijimaD/lamp/expstmt"
 	"github.com/kijimaD/lamp/myscope"
 )
 
@@ -17,7 +18,7 @@ func main() {
 	myscopeCmd := flag.NewFlagSet("myscope", flag.ExitOnError)
 
 	if len(os.Args) < cmdCount {
-		panic("expected 'myscope' | 'astdump' subcommands")
+		panic("expected 'myscope' | 'astdump' | 'expstmt' subcommands")
 	}
 
 	switch os.Args[1] {
@@ -45,6 +46,16 @@ func main() {
 			ast.Print(fset, d)
 			fmt.Println() //nolint:forbidigo
 		}
+	case "expstmt":
+		if err := myscopeCmd.Parse(os.Args[2:]); err != nil {
+			panic(err)
+		}
+		file, err := os.Open(os.Args[2])
+		if err != nil {
+			panic(err)
+		}
+		c := expstmt.NewClient(file, os.Stdout)
+		c.Run()
 	default:
 		panic("not found subcommand")
 	}

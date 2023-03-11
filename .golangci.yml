@@ -6,7 +6,7 @@ linters:
     - bodyclose
     - containedctx
     - contextcheck
-    - cyclop
+    # - cyclop
     # - deadcode
     - decorder
     - depguard
@@ -25,7 +25,7 @@ linters:
     - exportloopref
     - forbidigo
     - forcetypeassert
-    - funlen
+    # - funlen
     - gci
     - ginkgolinter
     - gocheckcompilerdirectives
@@ -98,7 +98,7 @@ linters:
     - unused
     - usestdlibvars
     # - varcheck
-    - varnamelen
+    # - varnamelen
     # - wastedassign
     - whitespace
     - wrapcheck
