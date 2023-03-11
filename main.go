@@ -15,7 +15,7 @@ import (
 const cmdCount = 2
 
 func main() {
-	myscopeCmd := flag.NewFlagSet("myscope", flag.ExitOnError)
+	lampCmd := flag.NewFlagSet("lamp", flag.ExitOnError)
 
 	if len(os.Args) < cmdCount {
 		panic("expected 'myscope' | 'astdump' | 'expstmt' subcommands")
@@ -23,7 +23,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "myscope":
-		if err := myscopeCmd.Parse(os.Args[2:]); err != nil {
+		if err := lampCmd.Parse(os.Args[2:]); err != nil {
 			panic(err)
 		}
 		file, err := os.Open(os.Args[2])
@@ -33,7 +33,7 @@ func main() {
 		c := myscope.NewClient(file, os.Stdout)
 		c.Run()
 	case "astdump":
-		if err := myscopeCmd.Parse(os.Args[2:]); err != nil {
+		if err := lampCmd.Parse(os.Args[2:]); err != nil {
 			panic(err)
 		}
 		fset := token.NewFileSet()
@@ -47,7 +47,7 @@ func main() {
 			fmt.Println() //nolint:forbidigo
 		}
 	case "expstmt":
-		if err := myscopeCmd.Parse(os.Args[2:]); err != nil {
+		if err := lampCmd.Parse(os.Args[2:]); err != nil {
 			panic(err)
 		}
 		file, err := os.Open(os.Args[2])
