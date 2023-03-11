@@ -25,16 +25,7 @@ func (c *Client) Run() {
 		log.Fatalln("Error:", err)
 	}
 
-	// scopes := map[*types.Scope]struct{}{}
 	ast.Inspect(file, func(n ast.Node) bool {
-		// if ident, ok := n.(*ast.Ident); ok {
-		// 	innerMost := pkg.Scope().Innermost(ident.Pos())
-		// 	s, _ := innerMost.LookupParent(ident.Name, ident.Pos())
-		// 	if s != nil {
-		// 		scopes[s] = struct{}{}
-		// 	}
-		// }
-		// fmt.Fprintf(c.Output, "%#v", n)
 		switch v := n.(type) {
 		case ast.Decl:
 			switch d := v.(type) {
@@ -48,13 +39,21 @@ func (c *Client) Run() {
 		case ast.Stmt:
 			switch d := v.(type) {
 			case *ast.BlockStmt:
-				fmt.Fprintf(c.Output, "Blockstmt:\n")
+				fmt.Fprintf(c.Output, "BlockStmt:\n")
 			case *ast.AssignStmt:
-				fmt.Fprintf(c.Output, "Assignstmt:\n")
+				fmt.Fprintf(c.Output, "AssignStmt:\n")
 			case *ast.ExprStmt:
-				fmt.Fprintf(c.Output, "Exprstmt:\n")
+				fmt.Fprintf(c.Output, "ExprStmt:\n")
 			case *ast.ReturnStmt:
-				fmt.Fprintf(c.Output, "Returnstmt:\n")
+				fmt.Fprintf(c.Output, "ReturnStmt:\n")
+			case *ast.IfStmt:
+				fmt.Fprintf(c.Output, "IfStmt:\n")
+			case *ast.SwitchStmt:
+				fmt.Fprintf(c.Output, "SwitchStmt:\n")
+			case *ast.RangeStmt:
+				fmt.Fprintf(c.Output, "RangeStmt:\n")
+			case *ast.CaseClause:
+				fmt.Fprintf(c.Output, "CaseClause:\n")
 			default:
 				panic(d)
 			}
@@ -75,6 +74,12 @@ func (c *Client) Run() {
 				fmt.Fprintf(c.Output, "  CallExpr\n")
 			case *ast.SelectorExpr:
 				fmt.Fprintf(c.Output, "  SelectorExpr\n")
+			case *ast.BinaryExpr:
+				fmt.Fprintf(c.Output, "  BinaryExpr\n")
+			case *ast.IndexExpr:
+				fmt.Fprintf(c.Output, "  IndexExpr\n")
+			case *ast.SliceExpr:
+				fmt.Fprintf(c.Output, "  SliceExpr\n")
 			default:
 				panic(d)
 			}

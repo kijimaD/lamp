@@ -44,18 +44,18 @@ GenDecl:
 FuncDecl:
   Expr:   Ident: "main"
   Expr:   FuncType
-Blockstmt:
-Assignstmt:
+BlockStmt:
+AssignStmt:
   Expr:   Ident: "s1"
   Expr:   CompositeLit
   Expr:   Ident: "S1"
   Expr:   BasicLit: "\"test struct\""
-Assignstmt:
+AssignStmt:
   Expr:   Ident: "message"
   Expr:   CallExpr
   Expr:   Ident: "test"
   Expr:   BasicLit: "\"hello world\""
-Exprstmt:
+ExprStmt:
   Expr:   CallExpr
   Expr:   SelectorExpr
   Expr:   Ident: "fmt"
@@ -68,8 +68,8 @@ FuncDecl:
   Expr:   Ident: "s"
   Expr:   Ident: "string"
   Expr:   Ident: "string"
-Blockstmt:
-Returnstmt:
+BlockStmt:
+ReturnStmt:
   Expr:   Ident: "s"
 FuncDecl:
   Expr:   Ident: "s"
@@ -77,8 +77,8 @@ FuncDecl:
   Expr:   Ident: "String"
   Expr:   FuncType
   Expr:   Ident: "string"
-Blockstmt:
-Returnstmt:
+BlockStmt:
+ReturnStmt:
   Expr:   SelectorExpr
   Expr:   Ident: "s"
   Expr:   Ident: "test"
@@ -89,7 +89,6 @@ func TestRun(t *testing.T) {
 
 	in := strings.NewReader(src)
 	out := &bytes.Buffer{}
-	// out := os.Stdout
 
 	c := expstmt.NewClient(in, out)
 	c.Run()
